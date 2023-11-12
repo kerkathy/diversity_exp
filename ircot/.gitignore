@@ -1,0 +1,15 @@
+*.pyc
+.DS_Store
+raw_data/
+processed_data/
+predictions/
+instantiated_configs/
+official_evaluation/
+predictions_archived/
+elasticserach-7.10.2/
+.retriever_address.json
+.llm_server_address.json
+.retriever_address.jsonnet
+.llm_server_address.jsonnet
+.history
+.temp
