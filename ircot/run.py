@@ -244,10 +244,10 @@ instantiation_schemes = {
     "oner": {"bm25_retrieval_count": ["15"],
     },
     "oner_qa": {
-        "bm25_retrieval_count": ["5", "7", "9", "11", "13", "15", "50"],
+        "bm25_retrieval_count": ["1", "2", "3", "4"],
         # "bm25_retrieval_count": ["5", "7", "9", "11", "13", "15"],
-        "distractor_count": ['"2"'],
-        # "distractor_count": ['"1"', '"2"', '"3"'],
+        # "distractor_count": ['"2"'],
+        "distractor_count": ['"1"', '"2"', '"3"'],
     },
     "ircot": {
         "bm25_retrieval_count": ["2", "4", "6", "8"],

@@ -46,7 +46,8 @@ local rc_qa_type = null; # Choices: direct, cot
             "query_source": "original_question",
             "source_corpus_name": retrieval_corpus_name,
             "document_type": "title_paragraph_text",
-            "return_pids": true,
+            "return_pids": false,
+            "return_paras": true, # To directly see the text of the retrieved paragraphs.
             "end_state": "[EOQ]",
             "similarity_threshold": similarity_threshold,
         },

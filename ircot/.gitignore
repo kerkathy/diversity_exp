@@ -6,7 +6,8 @@ predictions/
 instantiated_configs/
 official_evaluation/
 predictions_archived/
-elasticserach-7.10.2/
+elasticsearch-7.10.2/
+results/
 .retriever_address.json
 .llm_server_address.json
 .retriever_address.jsonnet

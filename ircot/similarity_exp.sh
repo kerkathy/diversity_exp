@@ -1,8 +1,9 @@
 # same as reproduce.sh but add --similarity_threshold for each command
-# usage : bash similarity_exp.sh oner flan-t5-base hotpotqa
+# usage for retrieval only: bash similarity_exp.sh oner none hotpotqa
+# usage for retrieval + qa: bash similarity_exp.sh oner_qa flan-t5-base hotpotqa
 # This runs similarity experiment for threshold [80, 70, 60, 50, 40, 99 95 85 35 30 25 20]
 
-threshold=(99 90 70 50 30 20)
+threshold=(99 70 50 30)
 for i in ${threshold[*]}
 do
 echo "$i"
@@ -61,35 +62,35 @@ do
     python runner.py $1 $2 $3 predict --prompt_set 1 --similarity_threshold $i
     ## If prediction files already exist, it won't redo them. Pass --force if you want to redo.
 
-    echo ">>>> Run evaluation for different HPs on the dev set. <<<<"
-    python runner.py $1 $2 $3 evaluate --prompt_set 1 --similarity_threshold $i
-    ## This runs by default after prediction. This is mainly to show a standalone option.
+    # echo ">>>> Run evaluation for different HPs on the dev set. <<<<"
+    # python runner.py $1 $2 $3 evaluate --prompt_set 1 --similarity_threshold $i
+    # ## This runs by default after prediction. This is mainly to show a standalone option.
 
-    echo ">>>> Show results for experiments with different HPs <<<<"
-    python runner.py $1 $2 $3 summarize --prompt_set 1 --similarity_threshold $i
-    ## Not necessary as such, it'll just show you the results using different HPs in a nice table.
+    # echo ">>>> Show results for experiments with different HPs <<<<"
+    # python runner.py $1 $2 $3 summarize --prompt_set 1 --similarity_threshold $i
+    # ## Not necessary as such, it'll just show you the results using different HPs in a nice table.
 
-    echo ">>>> Pick the best HP and save the config with that HP. <<<<"
-    python runner.py $1 $2 $3 write --prompt_set 1 --best --similarity_threshold $i
-    python runner.py $1 $2 $3 write --prompt_set 2 --best --similarity_threshold $i
-    python runner.py $1 $2 $3 write --prompt_set 3 --best --similarity_threshold $i
+    # echo ">>>> Pick the best HP and save the config with that HP. <<<<"
+    # python runner.py $1 $2 $3 write --prompt_set 1 --best --similarity_threshold $i
+    # python runner.py $1 $2 $3 write --prompt_set 2 --best --similarity_threshold $i
+    # python runner.py $1 $2 $3 write --prompt_set 3 --best --similarity_threshold $i
 
-    echo ">>>> Run the experiment with best HP on the test set <<<<"
-    python runner.py $1 $2 $3 predict --prompt_set 1 --best --eval_test --official --similarity_threshold $i
-    python runner.py $1 $2 $3 predict --prompt_set 2 --best --eval_test --official --similarity_threshold $i
-    python runner.py $1 $2 $3 predict --prompt_set 3 --best --eval_test --official --similarity_threshold $i
-    ## If prediction files already exist, it won't redo them. Pass --force if you want to redo.
+    # echo ">>>> Run the experiment with best HP on the test set <<<<"
+    # python runner.py $1 $2 $3 predict --prompt_set 1 --best --eval_test --official --similarity_threshold $i
+    # python runner.py $1 $2 $3 predict --prompt_set 2 --best --eval_test --official --similarity_threshold $i
+    # python runner.py $1 $2 $3 predict --prompt_set 3 --best --eval_test --official --similarity_threshold $i
+    # ## If prediction files already exist, it won't redo them. Pass --force if you want to redo.
 
-    echo ">>>> Run evaluation for the best HP on the test set <<<<"
-    python runner.py $1 $2 $3 evaluate --prompt_set 1 --best --eval_test --official --similarity_threshold $i
-    python runner.py $1 $2 $3 evaluate --prompt_set 2 --best --eval_test --official --similarity_threshold $i
-    python runner.py $1 $2 $3 evaluate --prompt_set 3 --best --eval_test --official --similarity_threshold $i
-    ## This runs by default after prediction. This is mainly to show a standalone option.
+    # echo ">>>> Run evaluation for the best HP on the test set <<<<"
+    # python runner.py $1 $2 $3 evaluate --prompt_set 1 --best --eval_test --official --similarity_threshold $i
+    # python runner.py $1 $2 $3 evaluate --prompt_set 2 --best --eval_test --official --similarity_threshold $i
+    # python runner.py $1 $2 $3 evaluate --prompt_set 3 --best --eval_test --official --similarity_threshold $i
+    # ## This runs by default after prediction. This is mainly to show a standalone option.
 
-    echo ">>>> Summarize best test results for individual prompts and aggregate (mean +- std) of them) <<<<"
-    python runner.py $1 $2 $3 summarize --prompt_set 1 --best --eval_test --official --similarity_threshold $i
-    python runner.py $1 $2 $3 summarize --prompt_set 2 --best --eval_test --official --similarity_threshold $i
-    python runner.py $1 $2 $3 summarize --prompt_set 3 --best --eval_test --official --similarity_threshold $i
-    python runner.py $1 $2 $3 summarize --prompt_set aggregate --best --eval_test --official --similarity_threshold $i
-    # The mean and std in the final command is what we reported in the paper.
+    # echo ">>>> Summarize best test results for individual prompts and aggregate (mean +- std) of them) <<<<"
+    # python runner.py $1 $2 $3 summarize --prompt_set 1 --best --eval_test --official --similarity_threshold $i
+    # python runner.py $1 $2 $3 summarize --prompt_set 2 --best --eval_test --official --similarity_threshold $i
+    # python runner.py $1 $2 $3 summarize --prompt_set 3 --best --eval_test --official --similarity_threshold $i
+    # python runner.py $1 $2 $3 summarize --prompt_set aggregate --best --eval_test --official --similarity_threshold $i
+    # # The mean and std in the final command is what we reported in the paper.
 done

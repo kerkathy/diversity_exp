@@ -152,6 +152,13 @@ def fit_prompt_into_given_limit(
     tokenizer_model_name: str = "gpt2",
     last_is_test_example: bool = True,
 ):
+    """
+    Calculates the length of the prompt and iteratively removes the first demonstrations/examples until it fits into the given limit.
+    Demonstration tokens + test example tokens + estimated generation tokens <= model_length_limit
+    where 
+    - estimated generation tokens is set as 100 or 200
+    - the model_length_limit (token limit) is 8000 for code-davinci, 2000 for the others.
+    """
     assert remove_method in (
         "first",
         "last",
