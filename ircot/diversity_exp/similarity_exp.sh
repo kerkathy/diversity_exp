@@ -3,7 +3,7 @@
 # usage for retrieval + qa: bash similarity_exp.sh oner_qa flan-t5-base hotpotqa
 # This runs similarity experiment for threshold [80, 70, 60, 50, 40, 99 95 85 35 30 25 20]
 
-threshold=(99 70 50 30)
+threshold=(99)
 for i in ${threshold[*]}
 do
 echo "$i"
